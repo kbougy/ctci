@@ -158,14 +158,14 @@ export default class LinkedList<T> {
                     return {
                         done: true,
                         value: current
-                    }
+                    };
                 } else {
                     let previous = current;
                     current = current.next;
                     return {
                         done: true,
                         value: previous
-                    }
+                    };
                 }
             }
         }
