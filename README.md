@@ -17,3 +17,19 @@ Run the test suite
 ```
 npm test
 ```
+
+## Tasks
+Build and bundle
+```
+gulp
+```
+
+Generate documentation
+```
+gulp typedoc
+```
+
+Linting
+```
+gulp tslint
+```
