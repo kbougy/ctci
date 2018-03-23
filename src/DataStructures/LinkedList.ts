@@ -20,7 +20,7 @@ export default class LinkedList<T> {
      * @runtime O(1)
      */
     insert(data: T) {
-        this.head = new Node<T>(data, this.head)
+        this.head = new Node<T>(data, this.head);
     }
 
     /**
@@ -66,7 +66,7 @@ export default class LinkedList<T> {
         let previous = null;
 
         if (current.data === data) {
-            this.head = this.head.next
+            this.head = this.head.next;
             return;
         }
 
@@ -86,7 +86,7 @@ export default class LinkedList<T> {
      * @runtime O(n)
      */
     deleteAtIndex(index: number) {
-        if (this.head === null) return
+        if (this.head === null) return;
 
         if (index === 0) {
             this.head = this.head.next;
@@ -124,7 +124,7 @@ export default class LinkedList<T> {
         let node = this.head;
         while (node.next !== null) {
             count += 1;
-            node = node.next
+            node = node.next;
         }
         return count;
     }
