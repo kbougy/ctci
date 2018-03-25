@@ -1,6 +1,6 @@
 import DoublyLinkedList from "./DoublyLinkedList";
 
-export default class Queue<T> {
+export default class Stack<T> {
     private l: DoublyLinkedList<T>;
 
     constructor() {
@@ -17,7 +17,7 @@ export default class Queue<T> {
     }
 
     /**
-     * Returns the size of the queue.
+     * Return the size of the stack.
      * @runtime O(n)
      */
     public size(): number {
@@ -25,23 +25,12 @@ export default class Queue<T> {
     }
 
     /**
-     * Obtain the first element in the queue or null if the queue is empty.
+     * Obtain the top element in the stack or null if the stack is empty.
      *
      * @runtime O(1)
      */
-    public front(): T {
+    public top(): T {
         let node = this.l.getNode(0);
-        if (node === null) return null;
-        return node.data;
-    }
-
-    /**
-     * Obtain the first element in the queue or null if the queue is empty.
-     *
-     * @runtime O(1)
-     */
-    public back(): T {
-        let node = this.l.getNode(-1);
         if (node === null) return null;
         return node.data;
     }
@@ -52,7 +41,7 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public push(data: T) {
-        this.l.insertBack(data);
+        this.l.insertFront(data);
     }
 
     /**

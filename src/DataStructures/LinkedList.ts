@@ -8,7 +8,7 @@ class Node<T> {
 }
 
 export default class LinkedList<T> {
-    head: Node<T>;
+    private head: Node<T>;
 
     constructor() {
         this.head = null;
@@ -19,7 +19,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(1)
      */
-    insert(data: T) {
+    public insert(data: T) {
         this.head = new Node<T>(data, this.head);
     }
 
@@ -28,7 +28,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(n)
      */
-    insertBack(data: T) {
+    public insertBack(data: T) {
         if (this.head === null) {
             this.insert(data);
             return;
@@ -47,7 +47,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(1)
      */
-    insertAfter(node: Node<T>, data: T) {
+    public insertAfter(node: Node<T>, data: T) {
         if (node === null) return;
 
         let newNode = new Node<T>(data, node.next);
@@ -59,7 +59,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(n)
      */
-    deleteData(data: T) {
+    public deleteData(data: T) {
         if (this.head === null) return;
 
         let current = this.head;
@@ -85,7 +85,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(n)
      */
-    deleteAtIndex(index: number) {
+    public deleteAtIndex(index: number) {
         if (this.head === null) return;
 
         if (index === 0) {
@@ -110,7 +110,7 @@ export default class LinkedList<T> {
      * @returns The node at the given index, or null if it doesn't exist.
      * @runtime O(n)
      */
-    getNode(index: number): Node<T> {
+    public getNode(index: number): Node<T> {
         let current = this.head;
         for (let i = 0; i < index; i++) {
             current = current.next;
@@ -122,7 +122,7 @@ export default class LinkedList<T> {
     /**
      * @runtime O(1)
      */
-    empty(): boolean {
+    public empty(): boolean {
         if (this.head === null) return true;
         return false;
     }
@@ -130,7 +130,7 @@ export default class LinkedList<T> {
     /**
      * @runtime O(n)
      */
-    size(): number {
+    public size(): number {
         if (this.head === null) {
             return 0;
         }
@@ -149,7 +149,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(n)
      */
-    length(): number {
+    public length(): number {
         return this._length(this.head);
     }
 
@@ -165,7 +165,7 @@ export default class LinkedList<T> {
      *
      * @runtime O(n)
      */
-    [Symbol.iterator]() {
+    public [Symbol.iterator]() {
         let current = this.head;
         let iterator = {
             next() {

@@ -10,8 +10,8 @@ class Node<T> {
 }
 
 export default class DoublyLinkedList<T> {
-    firstNode: Node<T>;
-    lastNode: Node<T>;
+    private firstNode: Node<T>;
+    private lastNode: Node<T>;
 
     constructor() {
         this.firstNode = null;
