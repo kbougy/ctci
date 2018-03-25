@@ -1,7 +1,7 @@
 import DoublyLinkedList from "./DoublyLinkedList";
 
 export default class Queue<T> {
-    l: DoublyLinkedList<T>;
+    private l: DoublyLinkedList<T>;
 
     constructor() {
         this.l = new DoublyLinkedList<T>();

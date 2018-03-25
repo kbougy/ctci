@@ -6,7 +6,7 @@ export default class Tree<T> {
      */
 
     data: T | null;
-    children: DoublyLinkedList<Tree<T>>;
+    private children: DoublyLinkedList<Tree<T>>;
 
     /**
      * Create the empty (null) tree.
@@ -27,9 +27,9 @@ export default class Tree<T> {
         // The tree is the null tree.
         if (this.data === null) {
             this.data = data;
-            return;
+        } else {
+            this.children.insertBack(new Tree<T>(data))
         }
-        this.children.insertBack(new Tree<T>(data))
     }
 
     /**
