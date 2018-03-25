@@ -17,6 +17,17 @@ it("can have a multiple values inserted", () => {
     expect(linkedList.head.next.next.data).toBe(1)
 });
 
+it("can be accessed with an index", () => {
+    let linkedList = new LinkedList<number>();
+    linkedList.insert(1);
+    linkedList.insert(2);
+    linkedList.insert(3);
+
+    expect(linkedList.getNode(0).data).toBe(3)
+    expect(linkedList.getNode(1).data).toBe(2)
+    expect(linkedList.getNode(2).data).toBe(1)
+});
+
 it("empty returns true if the list has no nodes", () => {
     let linkedList = new LinkedList<number>();
     expect(linkedList.empty()).toBe(true);

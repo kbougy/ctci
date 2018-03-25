@@ -105,6 +105,21 @@ export default class LinkedList<T> {
     }
 
     /**
+     * Obtain the node at the given index.
+     *
+     * @returns The node at the given index, or null if it doesn't exist.
+     * @runtime O(n)
+     */
+    getNode(index: number): Node<T> {
+        let current = this.head;
+        for (let i = 0; i < index; i++) {
+            current = current.next;
+            if (current === null) return null;
+        }
+        return current;
+    }
+
+    /**
      * @runtime O(1)
      */
     empty(): boolean {
