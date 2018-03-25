@@ -147,11 +147,14 @@ export default class DoublyLinkedList<T> {
 
     /**
      * Obtain the node at the given index.
+     * Supports obtaining the back of the list with an index of -1.
      *
      * @returns The node at the given index, or null if it doesn't exist.
      * @runtime O(n)
      */
     public getNode(index: number): Node<T> {
+        if (index === -1) return this.lastNode;
+
         let current = this.firstNode;
         for (let i = 0; i < index; i++) {
             current = current.next;

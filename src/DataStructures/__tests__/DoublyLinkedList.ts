@@ -18,6 +18,15 @@ it("can be accessed with an index", () => {
     expect(l.getNode(2).data).toBe(1)
 });
 
+it("can be accessed with a -1 index", () => {
+    let l = new DoublyLinkedList<number>();
+    l.insertFront(1);
+    l.insertFront(2);
+    l.insertFront(3);
+
+    expect(l.getNode(-1).data).toBe(1)
+});
+
 it("empty returns true if the list has no nodes", () => {
     let l = new DoublyLinkedList<number>();
     expect(l.empty()).toBe(true);
