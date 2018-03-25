@@ -1,10 +1,24 @@
 import DoublyLinkedList from "./DoublyLinkedList";
 
-export default class Queue<T> {
-    private l: DoublyLinkedList<T>;
+interface QueueContainer<T> {
+    empty(): boolean;
+    size(): number;
+    front(): T;
+    back(): T;
+    insertFront(element: T): void;
+    insertBack(element: T): void;
+    deleteFront(): void;
+    deleteBack(): void;
+}
 
-    constructor() {
-        this.l = new DoublyLinkedList<T>();
+export default class Queue<T> {
+    private c: QueueContainer<T>;
+
+    /**
+     * An instance of a type of container.
+     */
+    constructor(container: QueueContainer<T> = new DoublyLinkedList<T>()) {
+        this.c = container;
     }
 
     /**
@@ -13,7 +27,7 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public empty(): boolean {
-        return this.l.empty();
+        return this.c.empty();
     }
 
     /**
@@ -21,7 +35,7 @@ export default class Queue<T> {
      * @runtime O(n)
      */
     public size(): number {
-        return this.l.size();
+        return this.c.size();
     }
 
     /**
@@ -30,9 +44,7 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public front(): T {
-        let node = this.l.getNode(0);
-        if (node === null) return null;
-        return node.data;
+        return this.c.front();
     }
 
     /**
@@ -41,9 +53,7 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public back(): T {
-        let node = this.l.getNode(-1);
-        if (node === null) return null;
-        return node.data;
+        return this.c.back()
     }
 
     /**
@@ -52,7 +62,7 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public push(data: T) {
-        this.l.insertBack(data);
+        this.c.insertBack(data);
     }
 
     /**
@@ -61,6 +71,6 @@ export default class Queue<T> {
      * @runtime O(1)
      */
     public pop() {
-        this.l.deleteAtIndex(0);
+        this.c.deleteFront();
     }
 }

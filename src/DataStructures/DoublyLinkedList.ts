@@ -19,6 +19,28 @@ export default class DoublyLinkedList<T> {
     }
 
     /**
+     * Get the value at the front of the list.
+     *
+     * @runtime O(1)
+     */
+    public front(): T {
+        let node = this.getNode(0);
+        if (node == null) return null;
+        return node.data;
+    }
+
+    /**
+     * Get the value at the front of the list.
+     *
+     * @runtime O(1)
+     */
+    public back(): T {
+        let node = this.getNode(-1);
+        if (node == null) return null;
+        return node.data;
+    }
+
+    /**
      * Insert a value into the list.
      *
      * @runtime O(1)
@@ -36,6 +58,24 @@ export default class DoublyLinkedList<T> {
     public insertBack(data: T) {
         let node = new Node<T>(data);
         this.insertNodeBack(node);
+    }
+
+    /**
+     * Remove the first element in the list.
+     *
+     * @runtime O(1)
+     */
+    public deleteFront() {
+        this.deleteAtIndex(0);
+    }
+
+    /**
+     * Insert a value into the list.
+     *
+     * @runtime O(1)
+     */
+    public deleteBack() {
+        this.deleteAtIndex(-1);
     }
 
     /**
@@ -116,7 +156,9 @@ export default class DoublyLinkedList<T> {
      *
      * @runtime O(n)
      */
-    public deleteAtIndex(index: number) {
+    public deleteAtIndex(index: number): void {
+        if (index === -1) return this.removeNode(this.lastNode);
+
         let current = this.firstNode;
         if (current === null) return;
 
@@ -132,7 +174,9 @@ export default class DoublyLinkedList<T> {
      *
      * @runtime O(1)
      */
-    public removeNode(node: Node<T>) {
+    public removeNode(node: Node<T>): void {
+        if (node === null) return null;
+
         if (node.previous === null) {
             this.firstNode = node.next;
         } else {
@@ -166,7 +210,7 @@ export default class DoublyLinkedList<T> {
     /**
      * @runtime O(1)
      */
-    empty(): boolean {
+    public empty(): boolean {
         if (this.firstNode === null) return true;
         return false;
     }
@@ -174,7 +218,7 @@ export default class DoublyLinkedList<T> {
     /**
      * @runtime O(n)
      */
-    size(): number {
+    public size(): number {
         if (this.firstNode === null) {
             return 0;
         }
@@ -193,7 +237,7 @@ export default class DoublyLinkedList<T> {
      *
      * @runtime O(n)
      */
-    length(): number {
+    public length(): number {
         return this._length(this.firstNode);
     }
 

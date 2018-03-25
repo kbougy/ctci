@@ -7,7 +7,10 @@ class Node<T> {
     }
 }
 
-export default class LinkedList<T> {
+export default class SinglyLinkedList<T> {
+    /**
+     * @todo Store size as a variable to remove O(n) runtime.
+     */
     private head: Node<T>;
 
     constructor() {
@@ -15,11 +18,29 @@ export default class LinkedList<T> {
     }
 
     /**
+     * Obtain the value at the front of the list.
+     */
+    public front(): T {
+        let node = this.getNode(0);
+        if (node === null) return null;
+        return node.data;
+    }
+
+    /**
+     * Obtain the value at the front of the list.
+     */
+    public back(): T {
+        let node = this.getNode(-1);
+        if (node === null) return null;
+        return node.data;
+    }
+
+    /**
      * Insert a value into the list.
      *
      * @runtime O(1)
      */
-    public insert(data: T) {
+    public insertFront(data: T) {
         this.head = new Node<T>(data, this.head);
     }
 
@@ -30,7 +51,7 @@ export default class LinkedList<T> {
      */
     public insertBack(data: T) {
         if (this.head === null) {
-            this.insert(data);
+            this.insertFront(data);
             return;
         }
 
@@ -81,6 +102,24 @@ export default class LinkedList<T> {
     }
 
     /**
+     * Delete the node at the front of the list.
+     *
+     * @runtime O(1)
+     */
+    public deleteFront() {
+        return this.deleteAtIndex(0);
+    }
+
+    /**
+     * Delete the node at the back of the list.
+     *
+     * @runtime O(n)
+     */
+    public deleteBack() {
+        return this.deleteAtIndex(-1);
+    }
+
+    /**
      * Delete a node with the given index.
      *
      * @runtime O(n)
@@ -88,10 +127,15 @@ export default class LinkedList<T> {
     public deleteAtIndex(index: number) {
         if (this.head === null) return;
 
+        if (index === -1) {
+            index = this.size() - 1
+        }
+
         if (index === 0) {
             this.head = this.head.next;
             return;
         }
+
 
         let current = this.head;
         for (let i = 0; i < index - 1; i++) {
@@ -111,6 +155,7 @@ export default class LinkedList<T> {
      * @runtime O(n)
      */
     public getNode(index: number): Node<T> {
+        if (index === -1) index = this.size() - 1;
         let current = this.head;
         for (let i = 0; i < index; i++) {
             current = current.next;

@@ -1,3 +1,4 @@
+import SinglyLinkedList from "../SinglyLinkedList";
 import Queue from "../Queue";
 
 test("starts off empty", () => {
@@ -45,6 +46,15 @@ test("pop does nothing to an empty queue", () => {
 test("pop removes the first element in queue", () => {
     let q = new Queue<number>();
 
+    q.push(0);
+    expect(q.front()).toBe(0);
+
+    q.pop();
+    expect(q.front()).toBeNull();
+});
+
+test("takes an alternate container", () => {
+    let q = new Queue<number>(new SinglyLinkedList<number>());
     q.push(0);
     expect(q.front()).toBe(0);
 
