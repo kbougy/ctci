@@ -193,3 +193,24 @@ it("deleteAtIndex delete from the end of the list", () => {
     expect(l.getNode(2).data).toBe(3);
     expect(l.getNode(3).data).toBe(2);
 });
+
+it("deleteFront removes from the front of the list", () => {
+    let l = new DoublyLinkedList<number>();
+    l.insertBack(5);  // Index 4
+    l.insertBack(4);  // Index 3
+    l.insertBack(3);  // Index 2, should be removed
+    l.insertBack(2);  // Index 1
+    l.insertBack(1);  // Index 0
+
+    expect(l.front()).toBe(5);
+    l.deleteFront();
+    expect(l.front()).toBe(4);
+    l.deleteFront();
+    expect(l.front()).toBe(3);
+    l.deleteFront();
+    expect(l.front()).toBe(2);
+    l.deleteFront();
+    expect(l.front()).toBe(1);
+    l.deleteFront();
+    expect(l.front()).toBeNull();
+});

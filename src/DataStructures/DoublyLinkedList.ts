@@ -175,18 +175,14 @@ export default class DoublyLinkedList<T> {
      * @runtime O(1)
      */
     public removeNode(node: Node<T>): void {
-        if (node === null) return null;
+        if (this.firstNode === null || node === null) return;
 
-        if (node.previous === null) {
+        if (this.firstNode === node) {
             this.firstNode = node.next;
-        } else {
-            node.previous.next = node.next;
         }
-        if (node.next === null) {
-            this.lastNode = node.previous;
-        } else {
-            node.next.previous = node.previous
-        }
+
+        if (node.next != null) node.next.previous = node.previous;
+        if (node.previous != null) node.previous.next = node.next;
     }
 
     /**

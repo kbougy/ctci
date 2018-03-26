@@ -1,3 +1,5 @@
+import Queue from "./Queue";
+
 export default class BinarySearchTree<T> {
     /**
      * A binary search tree.
@@ -11,8 +13,8 @@ export default class BinarySearchTree<T> {
      */
     constructor(data: T = null) {
         this.data = data;
-        this.leftTree = new BinarySearchTree<T>();
-        this.rightTree = new BinarySearchTree<T>();
+        this.leftTree = null;
+        this.rightTree = null;
     }
 
     /**
@@ -20,24 +22,91 @@ export default class BinarySearchTree<T> {
      *
      * @runtime O(log(n))
      */
-    public insert(data: T) {
+    public insert(data: T): void {
         // The tree is the null tree.
         if (this.data === null) {
             this.data = data;
         } else {
-            this.children.insertBack(new Tree<T>(data))
+            if (data === this.data) {
+                return;
+            } else if (data < this.data) {
+                if (this.leftTree === null) {
+                    this.leftTree = new BinarySearchTree<T>(data);
+                } else {
+                    return this.leftTree.insert(data);
+                }
+            } else {
+                if (this.rightTree === null) {
+                    this.rightTree = new BinarySearchTree<T>(data);
+                } else {
+                    return this.rightTree.insert(data);
+                }
+            }
         }
     }
 
     /**
-     * Obtain the nth child tree.
+     * Search for a value in the tree.
      *
-     * @returns a subtree, or null if the nth child does not exist.
-     * @runtime O(n)
+     * @runtime O(log(n))
      */
-    public subTree(index: number): Tree<T> {
-        let node = this.children.getNode(index);
-        if (node === null) return null;
-        return node.data;
+    public search(data: T): boolean{
+        if (this.data === null) return false;
+        else if (data === this.data) return true;
+        else if (data < this.data) {
+            if (this.leftTree === null) return false;
+            return this.leftTree.search(data);
+        } else {
+            if (this.rightTree === null) return false;
+            return this.rightTree.search(data);
+        }
+
+    }
+
+    public traverse(s: string): Queue<T> {
+        let q = new Queue<T>();
+        s = s.toLowerCase();
+        if (s === "inorder") this.traverseInOrder(this, q);
+        else if (s === "preorder") this.traversePreOrder(this, q);
+        else if (s === "postorder") this.traversePostOrder(this, q);
+        return q;
+    }
+
+    /**
+     * General traverse for future implementation.
+     */
+    public traverseInOrder(t: BinarySearchTree<T>, q: Queue<T>) {
+        if (t === null) return;
+        this.traverseInOrder(t.leftTree, q);
+        q.push(t.data)
+        this.traverseInOrder(t.rightTree, q);
+    }
+
+    /**
+     * General traverse for future implementation.
+     */
+    public traversePreOrder(t: BinarySearchTree<T>, q: Queue<T>) {
+        if (t === null) return;
+        q.push(t.data)
+        this.traversePreOrder(t.leftTree, q);
+        this.traversePreOrder(t.rightTree, q);
+    }
+
+    /**
+     * General traverse for future implementation.
+     */
+    public traversePostOrder(t: BinarySearchTree<T>, q: Queue<T>) {
+        if (t === null) return;
+        this.traversePostOrder(t.leftTree, q);
+        this.traversePostOrder(t.rightTree, q);
+        q.push(t.data)
+    }
+
+    public getLeftTree(): BinarySearchTree<T> {
+        return this.leftTree;
+    }
+
+    public getRightTree(): BinarySearchTree<T> {
+        return this.rightTree;
     }
 }

@@ -53,6 +53,28 @@ test("pop removes the first element in queue", () => {
     expect(q.front()).toBeNull();
 });
 
+test("pop removes elements from the queue", () => {
+    let q = new Queue<number>();
+
+    q.push(0);
+    expect(q.front()).toBe(0);
+
+    q.push(1);
+    expect(q.front()).toBe(0);
+
+    q.push(2);
+    expect(q.front()).toBe(0);
+
+    q.pop();
+    expect(q.front()).toBe(1);
+
+    q.pop();
+    expect(q.front()).toBe(2);
+
+    q.pop();
+    expect(q.front()).toBeNull();
+});
+
 test("takes an alternate container", () => {
     let q = new Queue<number>(new SinglyLinkedList<number>());
     q.push(0);
